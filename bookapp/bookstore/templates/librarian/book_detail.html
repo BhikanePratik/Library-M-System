@@ -1,0 +1,50 @@
+{% extends 'librarian/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid">
+        <div class="row">
+          <div class="col-12 mb-3">
+          <div class="col-12 mb-3">
+              <div id="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="">Book Title : {{ object.title }} </a>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table text-warning"></i>
+                    Details Of Book
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+ <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+              {% comment %} <li class="list-group-item"><strong>Book ID:</strong> {{ object.book_id }}</li> {% endcomment %}
+              <li class="list-group-item"><strong>Issued By :</strong> {{ object.author }}</li>
+              <li class="list-group-item"><strong>Issued To :</strong> {{ object.uploaded_by }}</li>
+              <li class="list-group-item"><strong>Due Date:</strong> {{ object.desc }}</li>
+              <li class="list-group-item"><strong>Fine:</strong> {{ object.desc }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row top-buffer" style="padding-top: 10px">
+        <div class="col-12">
+                <a href="{% url 'managebook' %}"><button type="button" class="btn btn-success">Back</button></a>
+        </div>
+    </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
