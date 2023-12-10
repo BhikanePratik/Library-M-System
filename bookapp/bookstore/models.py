@@ -60,7 +60,7 @@ class IssuedItem(models.Model):
 
 
 class Chat(models.Model):
-    user_chat_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
     posted_at = models.DateTimeField(auto_now=True, null=True)
 

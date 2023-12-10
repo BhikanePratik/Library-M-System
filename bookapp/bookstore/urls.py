@@ -65,21 +65,15 @@ urlpatterns = [
 
  path('viewissuedbook/', views.viewissuedbook_view,name="viewissuedbook"),
  path('issuebook/', views.issuebook_view, name="issuebook"),
- path('deleteIssuedBook/<int:pk>/', views.delete_issued_book.as_view, name='deleteIssuedBook'),
-
-
-
-
 
     # Student URL's
  path('student/', views.student, name='student'), 
-#  path("issue/", views.issue, name="issue"),
- path("return_item/", views.return_item, name="return_item"),
- path("history/", views.history, name="history"),
+ path("studenthome/", views.studenthome, name="studenthome"),
  path('scchat/', views.SCreateChat.as_view(), name='scchat'),
  path('slchat/', views.SListChat.as_view(), name='slchat'),
  path("view_issued_book/", views.view_issued_book, name="view_issued_book"),
  path('viewissuedbookbystudent/', views.viewissuedbookbystudent,name="viewissuedbookbystudent"),
+ 
 
 
 

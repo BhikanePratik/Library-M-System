@@ -67,7 +67,7 @@ def loginView(request):
             elif user.is_librarian:
                 return redirect('librarian')
             else:
-                return redirect('viewissuedbookbystudent')
+                return redirect('studenthome')
         else:
             messages.info(request, "Invalid username or password")
             return redirect('home')
@@ -266,15 +266,6 @@ def viewissuedbook_view(request):
 
     return render(request,'librarian/viewissuedbook.html',{'li':li})
 
-class delete_issued_book(DeleteView):
-    model = IssuedItem
-    template_name = 'librarian/confirm_delete.html'  # Adjust the template name
-    success_url = reverse_lazy('viewissuedbook')  # Redirect to the viewissuedbook page after deletion
-
-    def get_success_url(self):
-        return reverse_lazy('viewissuedbook')
-    
-
 
 @login_required
 def  issuebook_view(request):
@@ -456,7 +447,7 @@ def create_user(request):
             email=request.POST['email']
             password=request.POST['password']
             password = make_password(password)
-            print("User Type")
+            print("User Type",userType)
             print(userType)
             if userType == "Student":
                 a = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password, is_student=True)
@@ -534,50 +525,8 @@ class ADeleteUser(SuccessMessageMixin, DeleteView):
 def student(request):
         return render(request, 'student/base.html')
 
-
-# Return view to return book to library
-@login_required(login_url="login")
-def return_item(request):
-    # If request is post then get book id from request
-    if request.method == "POST":
-        # Get book id from request
-        book_id = request.POST["book_id"]
-        # Get book object
-        current_book = Book.objects.get(id=book_id)
-        # Update book quantity
-        book = Book.objects.filter(id=book_id)
-        book.update(quantity=book[0].quantity + 1)
-        # Update return date of book and show success message
-        issue_item = IssuedItem.objects.filter(
-            user_id=request.user, book_id=current_book, return_date__isnull=True
-        )
-        issue_item.update(return_date=date.today())
-        messages.success(request, "Book returned successfully.")
-    # Get all books which are issued to user
-    my_items = IssuedItem.objects.filter(
-        user_id=request.user, return_date__isnull=True
-    ).values_list("book_id")
-    # Get all books which are not issued to user
-    books = Book.objects.exclude(~Q(id__in=my_items))
-    # Return return page with books that are issued to user
-    params = {"books": books}
-    return render(request, "student/return_item.html", params)
-
-
-
-# History view to show history of issued books to user
-@login_required(login_url="login")
-def history(request):
-    # Get all issued books to user
-    my_items = IssuedItem.objects.filter(user_id=request.user).order_by("-issue_date")
-    # Paginate data
-    paginator = Paginator(my_items, 10)
-    # Get page number from request
-    page_number = request.GET.get("page")
-    show_data_final = paginator.get_page(page_number)
-    # Return history page with issued books to user
-    return render(request, "student/history.html", {"books": show_data_final})
-
+def studenthome(request):
+        return render(request, 'student/home.html')
 
 class SCreateChat(LoginRequiredMixin, CreateView):
 	form_class = ChatForm
@@ -598,6 +547,7 @@ class SListChat(LoginRequiredMixin, ListView):
 
 	def get_queryset(self):
 		return Chat.objects.filter(posted_at__lt=timezone.now()).order_by('posted_at')
+      
 
 def view_issued_book(request):
     issue_item = issue_item.objects.all()

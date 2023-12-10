@@ -33,7 +33,6 @@
                       <th>Issued</th>
                       <th>Expiry Date</th>
                       <th>Fine</th>
-                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -45,21 +44,7 @@
                       <td>{{t.2}}</td>
                       <td>{{t.3}}</td>
                       <td>{{t.4}}</td>
-                      <td>{{t.5}}</td>
-                      
-                      <td>
-                        
-                          <a href="{% url 'deleteIssuedBook' book.pk %}">Delete</a>
-                  
-                          <!-- Handle the case where t.6 is empty or None -->
-                         
-                      </td>
-                        
-                       
-                          {% comment %} <a href="{% url 'deleteIssuedBook' t.6 %}">Delete</a>
-                         {% endcomment %}
-                        </a>
-                    </td>
+                      <td>${{t.5}}</td>
                     </tr>
                                       <!-- end for and if -->
                       {% endfor %}

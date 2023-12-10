@@ -8,12 +8,12 @@
     <br>
     <br>
 
-<h3 class="p-3 mb-2 bg-success text-white" style = 'font-size: 30px;text-align:center;'>Book Issued Successfully !</h3>
+<h3 class="p-3 mb-2 bg-success text-white" style = 'font-size: 30px;text-align:center;background-color:green; '>Book Issued Successfully !</h3>
 <br><br>
 <div class="options" style="text-align:center">
-  <a href="{% url 'issuebook' %}" class="btn btn-primary btn-lg active" style="border-radius: 0%;" role="button" aria-pressed="true">Issue more Book</a><br><br>
+  <button><a href="{% url 'issuebook' %}" class="btn btn-primary btn-lg active" style="border-radius: 0%;" role="button" aria-pressed="true">Issue more Book</a></button><br><br>
 
-<a href="{% url 'viewissuedbook' %}" class="btn btn-primary btn-lg active" style="border-radius: 0%;" role="button" aria-pressed="true">View Issued Book</a><br><br>
+<button><a href="{% url 'viewissuedbook' %}" class="btn btn-primary btn-lg active" style="border-radius: 0%;" role="button" aria-pressed="true">View Issued Book</a></button><br><br>
 </div>
 <br>
 {% comment %} {% include "library/footer.html" %} {% endcomment %}

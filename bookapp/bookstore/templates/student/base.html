@@ -41,19 +41,13 @@
                    </li>
                    {% else %}
                    <li class="nav-item">
-                       <a class="nav-link" href="/">Home</a>
+                       <a class="nav-link" href="{% url 'studenthome' %}">Home</a>
                    </li>
                    <li class="nav-item">
                     <a class="nav-link" href="{% url 'slchat' %}">Group Chat</a>
                 </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{% url 'viewissuedbookbystudent' %}">Issue</a>
-                   </li>
-                   <li class="nav-item">
-                       <a class="nav-link" href="{% url 'return_item' %}">Return</a>
-                   </li>
-                   <li class="nav-item">
-                       <a class="nav-link" href="{% url 'history' %}">History</a>
                    </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>

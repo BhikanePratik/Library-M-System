@@ -1,7 +1,13 @@
 {% extends 'student/base.html' %}
 
-
 {% block content %}
+
+<style>
+  textarea{
+      color: black !important;
+  }
+</style>
+
 
 <div class="container-fluid">
 <div class="row">
@@ -19,16 +25,16 @@
 <div class="card mb-2">
 <div class="card-body">
 
-<div class="row" style="background-color: black">
+<div class="row" style="background-color: white;">
 	 <div class="card col-sm-12">
-  <div class="card-header text-primary">
-     <center>Welcome To Library Group Chat</center>
+  <div class="card-header text-primary" style="background-color:grey;">
+     <center style="color:white;">Welcome To Library Group Chat</center>
   </div>
 </div>
 
     <div class="col-sm-8">
     	<div class="myform">
-    	    <form method="POST">
+    	    <form method="POST" style="margin-left:195px;">
     	{% csrf_token %}
     	{{ form.as_p }}
 
