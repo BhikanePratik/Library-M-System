@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+
+    <title>To-do Lists</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'edit.css' %}" />
+  </head>
+
+  <body>
+    {% for message in messages %}
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';"
+        >&times;</span
+      >
+      {{ message }}
+    </div>
+
+    {% endfor %}
+    <div>
+      <header class="header">
+        <h3>Edit Todo List</h3>
+        <form method="post" action="">
+          {% csrf_token %}
+           {% for field in form %}
+          <div class="fieldWrapper field">
+            {{ field.label_tag }} {{ field }}
+             {% comment %} {{ field.label_tag }} 
+             {{ field }} {% endcomment %}
+          </div>
+          {% endfor %}
+          <br />
+          <input type="submit" name="Edit" />
+        </form>
+      </header>
+    </div>
+  </body>
+</html>

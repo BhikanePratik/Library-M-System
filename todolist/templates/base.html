@@ -1,0 +1,83 @@
+<!-- todo_list/todo_app/templates/base.html -->
+<!-- Base template -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+    <title>To-do Lists</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todotask.css' %}" />
+</head>
+
+<body>
+    {% for message in messages %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+            {{ message }}
+        </div>
+      
+        {% comment %} <script>alert("{{ message }}")</script> {% endcomment %}
+        {% comment %} <div class="alert alert-dark message" role="alert">{{ message }}</div> {% endcomment %}
+    {% endfor %}
+     <div>
+        <header class="header">
+            <h1 onclick="location.href='{% url "login" %}'">
+                    To-do Lists
+            </h1>
+            <form id="new-task-form" action="{% url 'create_todo' %}" method='post'>
+                {% csrf_token %}
+                <input class="title" type="text" name="title" id="new-task-input" placeholder="Title" />
+                <br>
+                <textarea class="description" type="text" name="description" id="new-task-input" placeholder="What do you have planned?"></textarea>
+                <br>
+                <input type="submit" id="new-task-submit" value="Add task" class="inputSubmit" />
+            </form>
+        </header>
+    </div>
+                
+        <main>
+            <section class="task-list">
+                <h2>Tasks</h2>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for todo in todos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>  <span>{{ todo.title }}</span></td>
+                        <td><h6 class="mb-0"><span class="badge bg-danger">{{ todo.description }}</span></h6></td>
+                        
+                           <td>
+                            <a class="btn btn-sm btn-primary" href="{% url 'edit_todo' todo_id=todo.id %}">Edit</a>
+                            <a class="btn btn-sm btn-dark" href="{% url 'delete_todo' todo.id %}">Delete</a>
+
+                            </td>
+                    </tr>  
+                    {% empty %}
+                    <p>There are no to-do items in this list.</p>
+                {% endfor %}
+                
+                </tbody>
+          
+
+              </table>
+            
+            </section>
+        </main>
+</body>
+
+</html>
